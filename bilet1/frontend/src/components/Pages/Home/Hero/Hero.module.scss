@@ -1,0 +1,70 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hero{
+  background-image:url("../../../../assets/images/hero_2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 800px;
+
+  .container{
+    max-width: 960px;
+    margin: auto;
+
+    .items{
+      height: 800px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+
+      h1{
+        color: white;
+        font-size: 80px;
+      }
+      p{
+        color: white;
+        width: 300px;
+        font-size: 20px;
+      }
+
+      .buttons{
+        display: flex;
+        gap: 20px;
+
+        .shop{
+          background: none;
+          border: none;
+          color: white;
+          border: 2px solid white;
+          padding: 10px;
+          transition: 0.5s;
+        }
+
+        .shop:hover{
+          background-color: white;
+          color: black;
+        }
+
+        .club{
+          background-color: white;
+          color: black;
+          padding: 10px;
+          border: none;
+          transition: 0.5s;
+          border: 2px solid white;
+
+        }
+
+        .club:hover{
+          background-color: rgba(255, 255, 255, 0);
+          color: white;
+        }
+      }
+    }
+  }
+}
+
