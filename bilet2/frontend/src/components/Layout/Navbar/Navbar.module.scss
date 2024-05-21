@@ -1,0 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+
+    background: transparent;
+
+    .image {
+        background-image: url("../../../assets/slider-2.jpg");
+        height: 850px;
+
+        .container {
+            max-width: 1700px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid gray;
+
+            .header {
+                h1 {
+                    font-size: 50px;
+                    color: white;
+                }
+            }
+
+            .text {
+
+                ul {
+                    display: flex;
+                    list-style: none;
+                    gap: 20px;
+
+                    a {
+                        text-decoration: none;
+                        color: white;
+                        font-size: 25px;
+                    }
+                }
+            }
+
+            .reservation {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                font-size: 25px;
+                color: white;
+            }
+        }
+    }
+}
