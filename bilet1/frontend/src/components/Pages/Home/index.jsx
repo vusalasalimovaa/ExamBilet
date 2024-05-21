@@ -1,12 +1,14 @@
-import React from 'react'
-import Hero from './Hero'
+import React from "react";
+import Hero from "./Hero";
+import Products from "./Products";
 
 const Home = () => {
   return (
     <>
-    <Hero/>
+      <Hero />
+      <Products />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
