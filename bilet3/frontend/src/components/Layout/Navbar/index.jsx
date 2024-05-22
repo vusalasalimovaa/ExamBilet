@@ -6,9 +6,10 @@ import style from "./Navbar.module.scss";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-
-const {count} = useSelector((store) => store.count)
-
+  const { count } = useSelector((store) => store.count);
+  const {basket} = useSelector((store) => store.basket)
+  console.log(basket)
+  let basketCunt = basket?.reduce((acc, elem) => acc += elem.count, 0);
   return (
     <>
       <div className={style.navbar}>
@@ -47,7 +48,7 @@ const {count} = useSelector((store) => store.count)
             <div className={style.icons}>
               <Link to="/basket">
                 <SlBasket />
-                <span>{count}</span>
+                <span>{basketCunt}</span>
               </Link>
 
               <Link to="/fav">
