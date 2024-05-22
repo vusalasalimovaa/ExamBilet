@@ -1,19 +1,50 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const productApi = createApi({
-  reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api/menu' }),
+  reducerPath: "productApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "/api/menu" }),
   endpoints: (builder) => ({
     getProductById: builder.query({
       query: (id) => `/${id}`,
     }),
     getAllProduct: builder.query({
-        query: () => `/`,
+      query: () => `/`,
+    }),
+    deleteProductById: builder.mutation({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
       }),
-
+    }),
+    postProduct: builder.mutation({
+      query: ({ obj }) => ({
+        url: `/`,
+        method: "POST",
+        body: obj,
+      }),
+    }),
+    patchProductById: builder.mutation({
+      query: (id, { obj }) => ({
+        url: `/${id}`,
+        method: "PATCH",
+        body: obj,
+      }),
+    }),
+    putProductById: builder.mutation({
+      query: (id, { obj }) => ({
+        url: `/${id}`,
+        method: "PUT",
+        body: obj,
+      }),
+    }),
   }),
-})
+});
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetProductByIdQuery, useGetAllProductQuery } = productApi
+export const {
+  useGetProductByIdQuery,
+  useGetAllProductQuery,
+  useDeleteProductByIdMutation,
+  usePostProductMutation,
+  usePatchProductByIdMutation,
+  usePutProductByIdMutation
+} = productApi;

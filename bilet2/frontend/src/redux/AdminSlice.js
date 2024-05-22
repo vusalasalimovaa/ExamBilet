@@ -1,19 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    admin:[]
-}
+  menu: "",
+  AtoZ: false,
+};
 
 export const adminSlice = createSlice({
-    name:"admin",
-    initialState,
-    reducers:{  
-        deleteMenu: (state,action) =>{
-            state.admin = [...state.admin].filter((elem) =>elem._id !== action.payload._id)
-        }
-    }
-})
+  name: "admin",
+  initialState,
+  reducers: {
+    updateSearchMenu: (state, action) => {
+      state.menu = action.payload;
+    },
+    sortAtoZ: (state, action) => {
+      state.AtoZ = !state.AtoZ;
+    },
+  },
+});
 
-export const {deleteMenu} = adminSlice.actions
-export default adminSlice.reducer
+export const { updateSearchMenu,sortAtoZ } = adminSlice.actions;
+export default adminSlice.reducer;
