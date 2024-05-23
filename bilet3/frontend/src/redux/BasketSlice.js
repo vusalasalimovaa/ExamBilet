@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
 
 const initialState = {
   basket: JSON.parse(localStorage.getItem("basket")) || [],
-  count:0
+  count: 0,
 };
 
 export const basketSlice = createSlice({
@@ -16,28 +15,55 @@ export const basketSlice = createSlice({
       );
 
       if (elem) {
-        state.basket.find((elem) => elem._id == action.payload._id).count += 1
+        state.basket.find((elem) => elem._id == action.payload._id).count += 1;
       } else {
-        state.basket = [...state.basket, {...action.payload, count:1}];   
+        state.basket = [...state.basket, { ...action.payload, count: 1 }];
       }
 
-      localStorage.setItem("basket", JSON.stringify(state.basket))
+      localStorage.setItem("basket", JSON.stringify(state.basket));
     },
+    increaseCount: (state, action) => {
+      let elem = [...state.basket].find(
+        (elem) => elem._id == action.payload._id
+      );
 
-    getCount: (state, action) => {
-      let sum = 0;
-      [...state.basket].forEach((elem) => {
-        sum += elem.count;
-      });
+      elem.count++;
+      localStorage.setItem("basket", JSON.stringify(state.basket));
+    },
+    decreaseCount: (state, action) => {
+      let elem = [...state.basket].find(
+        (elem) => elem._id == action.payload._id
+      );
 
-      state.count = sum;
+      elem.count--;
 
+      if (elem.count <= 0) {
+        state.basket = [...state.basket].filter(
+          (el) => el._id !== action.payload._id
+        );
+      }
 
+      localStorage.setItem("basket", JSON.stringify(state.basket));
+    },
+    deleteBasket: (state, action) => {
+      state.basket = [...state.basket].filter(
+        (elem) => elem._id !== action.payload._id
+      );
 
-
+      localStorage.setItem("basket", JSON.stringify(state.basket));
+    },
+    clearBasket: (state, action) => {
+      state.basket = [];
+      localStorage.setItem("basket", JSON.stringify(state.basket));
     },
   },
 });
 
-export const { addToBasket,getCount } = basketSlice.actions;
+export const {
+  addToBasket,
+  increaseCount,
+  decreaseCount,
+  deleteBasket,
+  clearBasket,
+} = basketSlice.actions;
 export default basketSlice.reducer;

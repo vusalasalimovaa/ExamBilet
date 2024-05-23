@@ -11,27 +11,27 @@ export const menuApi = createApi({
     getAllMenu: builder.query({
       query: () => `/`,
     }),
-    deleteMenuById: builder.query({
+    deleteMenuById: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",
       }),
     }),
-    postMenu: builder.query({
+    postMenu: builder.mutation({
       query: ({ obj }) => ({
         url: `/`,
         method: "POST",
         body: obj,
       }),
     }),
-    patchMenuById: builder.query({
+    patchMenuById: builder.mutation({
       query: (id,{ obj }) => ({
         url: `/${id}`,
         method: "PATCH",
         body: obj,
       }),
     }),
-    putMenuById: builder.query({
+    putMenuById: builder.mutation({
         query: (id,{ obj }) => ({
           url: `/${id}`,
           method: "PUT",
@@ -41,4 +41,4 @@ export const menuApi = createApi({
   }),
 });
 
-export const { useGetMenuByIdQuery, useGetAllMenuQuery } = menuApi;
+export const { useGetMenuByIdQuery, useGetAllMenuQuery, useDeleteMenuByIdMutation,usePostMenuMutation,usePatchMenuByIdMutation,usePutMenuByIdMutation } = menuApi;

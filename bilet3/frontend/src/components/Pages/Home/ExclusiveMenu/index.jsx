@@ -3,15 +3,16 @@ import style from "./ExclusiveMenu.module.scss";
 import { useGetAllMenuQuery } from "../../../../services/menu";
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, getCount } from "../../../../redux/BasketSlice";
-
+import { addToBasket } from "../../../../redux/BasketSlice";
+import { addToFav, deleteFav } from "../../../../redux/FavSlice";
+import { FaHeart } from "react-icons/fa";
 
 const ExclusiveMenu = () => {
-    const {basket} = useSelector((store) => store.basket)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { fav } = useSelector((store) => store.fav);
 
   const { data: allMenu } = useGetAllMenuQuery();
-  console.log(allMenu);
+  // console.log(allMenu);
   return (
     <>
       <div className={style.exclusive}>
@@ -40,12 +41,22 @@ const ExclusiveMenu = () => {
                     </div>
 
                     <div>
-                        <button onClick={() => {
-                            dispatch(addToBasket(elem))
-                            dispatch(getCount())
-                        }}>Add to Cart</button>
-                        <FaRegHeart />
-
+                      <button
+                        onClick={() => {
+                          dispatch(addToBasket(elem));
+                          dispatch(getCount());
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                      {fav.find((el) => el._id == elem._id) ? (
+                        <FaHeart
+                          onClick={() => dispatch(deleteFav(elem))}
+                          style={{ color: "red" }}
+                        />
+                      ) : (
+                        <FaRegHeart onClick={() => dispatch(addToFav(elem))} />
+                      )}
                     </div>
                   </div>
                 );

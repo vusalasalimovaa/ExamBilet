@@ -41,17 +41,14 @@ export const getMenuById = async (req, res) => {
   try {
     const findMenu = await Menu.findOne({ _id: id });
 
-    if (findMenu) {
-      return res.status(200).json({
-        success: true,
-        message: "Menu found",
+    if (!findMenu) {
+      return res.status(404).json({
+        success: false,
+        message: "Menu not found found",
       });
     }
 
-    return res.status(404).json({
-      success: false,
-      message: "Menu not found found",
-    });
+    return res.status(200).json(findMenu);
   } catch (error) {
     return res.status(500).json({
       success: false,
